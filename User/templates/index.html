@@ -1,0 +1,352 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Medicine &mdash;Hub </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" 
+          href='{% static "css/c1.css" %}' type="text/css"/>
+    <script src="{% static 'js/c1.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    
+</head>
+
+<body>
+
+    <div class="site-wrap">
+        <div class="site-navbar py-2"  style="background-color:#a5e66aa4;">
+
+            <div class="search-wrap">
+                <div class="container">
+                    <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+                    <form action="#" method="post">
+                        <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+                    </form>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="logo">
+                        <div class="site-logo">
+                            {%if "uname" in request.session%}
+                            <a class="js-logo-clone" href="#">Welcome <strong class="text-primary">{{request.session.uname}}</strong></a>
+                            {%else%}
+                            <a href="/" class="js-logo-clone"><strong
+                                class="text-primary">Medicine</strong>Hub</a>
+                            {%endif%}
+                            
+
+                            
+                        </div>
+                    </div>
+                    <div class="main-nav d-none d-lg-block">
+                        <nav class="site-navigation text-right text-md-center" role="navigation">
+                            <ul class="site-menu js-clone-nav d-none d-lg-block">
+                                <li class="active"><a href="/">Home</a></li>
+                                <li><a href="/store">Store</a></li>
+                                <li class="has-children">
+                                    <a href="#">Category</a>
+                                    <ul class="dropdown">
+                                    {% for cat in cats %}
+                                    <li><a href="/ShowMedicines/{{cat.id}}">{{cat.category_name}}</a></li>
+                                    {%endfor%}
+                                    </ul>
+                                </li>
+                                
+                                <li><a href="/about">About</a></li>
+                                <li><a href="/contact">Contact</a></li>
+                                
+                                {%if "uname" in request.session%}
+                                <a href="/ShowAllCartItems" class="icons-btn d-inline-block bag">
+                                    <span class="icon-shopping-bag"></span></a></li>
+                
+                                <a href="/signout"><span class="glyphicon glyphicon-user"></span>Logout</a>
+ 
+                                {%else%}
+
+                                <li><a href="/login"></span>Login</a></li>
+                                <li><a href="/register">Signup</a></li>
+                                {%endif%}                  
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="icons">
+                        <ul class="site-menu js-clone-nav d-none d-lg-block">                            
+                        </ul>
+                        </a>
+                        <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+                                class="icon-menu"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    {%block content%}
+    
+        <br>
+
+        <div class="owl-carousel owl-single px-0">  
+            <div class="site-blocks-cover overlay" style="background-image: url('/static/images/hero_bg.jpg');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 mx-auto align-self-center">
+                            <div class="site-block-cover-content text-center">
+                                <h1 class="mb-0"><strong class="text-primary">Pharmative</strong> Opens 24 Hours</h1>
+
+                                <div class="row justify-content-center mb-5">
+                                    <div class="col-lg-6 text-center">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ex
+                                            perspiciatis non quibusdam vel quidem.</p>
+                                    </div>
+                                </div>
+
+                                <p><a href="#" class="btn btn-primary px-5 py-3">Shop Now</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            <div class="site-blocks-cover overlay" style="background-image: url('/static/images/hero_bg_2.jpg');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 mx-auto align-self-center">
+                            <div class="site-block-cover-content text-center">
+                                <h1 class="mb-0">New Medicine <strong class="text-primary">Everyday</strong></h1>
+                                <div class="row justify-content-center mb-5">
+                                    <div class="col-lg-6 text-center">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ex
+                                            perspiciatis non quibusdam vel quidem.</p>
+                                    </div>
+                                </div>
+                                <p><a href="#" class="btn btn-primary px-5 py-3">Shop Now</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        
+        <br/>
+        <div  style="background-color:#cefda1a4;">
+            <div class="container">
+                <div class="row">
+                    <div class="title-section text-center col-12">
+                        <h2>Pharmacy <strong class="text-primary">Products</strong></h2>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                <div id="news-slider" class="owl-carousel">
+                {%for medi in medicines%}
+                    <div class="post-slide">
+                    <div class="post-img">
+                        <img src="{{medi.prod_photo.url}}" style="width:300px;height:300px" alt="">
+                        <a href="/ViewDetails/{{medi.id}}" class="over-layer"><i class="fa fa-link"></i></a>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="post-title">
+                        <a href="/ViewDetails/{{medi.id}}">{{medi.prod_name}}</a>
+                        </h3>
+                        <p class="post-description">Rs: {{medi.prod_price}}</p>
+                        <span class="post-date"><i class="fa fa-clock-o"></i>Expiery: {{medi.prod_exp}}</span>
+                        </div>
+                    </div>
+                    
+                {%endfor%}
+            
+                </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="site-section bg-image overlay" style="background-image: url('/static/images/hero_bg_2.jpg');">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-7">
+                        <h3 class="text-white">Sign up for discount up to 55% OFF</h3>
+                        <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis
+                            voluptatem consectetur quam.</p>
+                        <p class="mb-0"><a href="/register" class="btn btn-outline-white">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-section">
+            <div class="container">
+
+                <div class="row justify-content-between">
+                    <div class="col-lg-6">
+                        <div class="title-section">
+                            <h2>Happy <strong class="text-primary">Customers</strong></h2>
+                        </div>
+                        <div class="block-3 products-wrap">
+                            <div class="owl-single no-direction owl-carousel">
+
+                                <div class="testimony">
+                                    <blockquote> 
+                                        <img src="{% static 'images/person_1.jpg' %}" alt="Image" class="img-fluid">
+                                        <p>&ldquo;I switched over to Excellent Care Pharmacy from another local pharmacy/store. Happy with the change.&rdquo;</p>
+                                        
+                                    </blockquote>
+
+                                    <p class="author">&mdash; Kelly Holmes</p>
+                                </div>
+
+                                <div class="testimony">
+                                    <blockquote> 
+                                        <img src="{% static 'images/person_2.jpg' %}" alt="Image" class="img-fluid">
+                                        <p>&ldquo;Fast and quality service. ...
+                                            Knowledgeable and experienced pharmacist.</p>
+                                    </blockquote>
+
+                                    <p class="author">&mdash; Rebecca Morando</p>
+                                </div>
+
+                                <div class="testimony">
+                                    <blockquote>
+                                        <img src="{% static 'images/person_3.jpg' %}" alt="Image" class="img-fluid">
+                                        <p>&ldquo;Had a very good customer service and on time delivery of Medicines&rdquo;</p>
+                                    </blockquote>
+
+                                    <p class="author">&mdash; Lucas Gallone</p>
+                                </div>
+
+                                <div class="testimony">
+                                    <blockquote>
+                                        <img src="{% static 'images/person_4.jpg' %}" alt="Image" class="img-fluid">
+                                        <p>&ldquo;Quality products at a reasonable price.&rdquo;</p>
+                                    </blockquote>
+
+                                    <p class="author">&mdash; Andrew Neel</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="title-section">
+                            <h2 class="mb-5">Why <strong class="text-primary">Us</strong></h2>
+                            <div class="step-number d-flex mb-4">
+                                <span>1</span>
+                                <p>To bring the gift of health to life.</p>
+                            </div>
+
+                            <div class="step-number d-flex mb-4">
+                                <span>2</span>
+                                <p>Our world of plenty is creating a poverty of health.</p>
+                            </div>
+
+                            <div class="step-number d-flex mb-4">
+                                <span>3</span>
+                                <p>Power of complete nutrition, not quick fixes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+                
+        </div>
+        
+    {%endblock%}
+    <br/>
+        <footer class="site-footer" style="background-color:#cffca5a4;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+
+                        <div class="block-7">
+                            <h3 class="footer-heading mb-4">About <strong class="text-primary">Medicine Hub</strong></h3>
+                            <p>
+                                Energy & vitality fuel the pursuit of happiness.</p>
+                            <p>-Our world of plenty is creating a poverty of health.</p>
+                            <p>-That good health should be within reach for all.</p> 
+                            <p>-In the power of complete nutrition, not quick fixes.</p>
+                            
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
+                        <h3 class="footer-heading mb-4">Navigation</h3>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Supplements</a></li>
+                            <li><a href="#">Vitamins</a></li>
+                            <li><a href="#">Diet &amp; Nutrition</a></li>
+                            <li><a href="#">Tea &amp; Coffee</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="block-5 mb-5">
+                            <h3 class="footer-heading mb-4">Contact Info</h3>
+                            <ul class="list-unstyled">
+                                <li class="address">203 St. Mountain View, Ratnagiri, India</li>
+                                <li class="phone"><a href="tel://23923929210">+91 92925 56210</a></li>
+                                <li class="email">medicinehub@domain.com</li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row pt-5 mt-5 text-center">
+                    <div class="col-md-12">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved <i class="icon-heart text-danger" aria-hidden="true"></i> by Medicine Hub<a
+                                 target="_blank" class="text-primary"></a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    
+
+
+
+</body>
+
+</html>

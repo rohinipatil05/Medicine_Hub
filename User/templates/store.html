@@ -1,0 +1,67 @@
+{%extends "index.html"%}
+{% load static %}
+{%block content%}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" 
+    href='{% static "css/store.css" %}' type="text/css"/>
+<div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0">
+          <a href="/">Home</a> <span class="mx-2 mb-0">/</span>
+          <strong class="text-black">Store</strong>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+        <div id="slider-range" class="border-primary"></div>
+        <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
+      
+        <input type="hidden" name="medicineid" value="{{medicines.id}}"/>
+      </div>
+      <div class="col-lg-6 text-lg-right">
+        <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter</h3>
+        <button type="button" class="btn btn-primary btn-md dropdown-toggle px-4" id="dropdownMenuReference"
+          data-toggle="dropdown">Reference</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+          <a class="dropdown-item" href="#">Relevance</a>
+          <a class="dropdown-item" href="{{medicines.id}}">Name, A to Z</a>
+          <a class="dropdown-item" href="#">Name, Z to A</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Price, low to high</a>
+          <a class="dropdown-item" href="#">Price, high to low</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+<div class="row mx-auto">
+    {%for medi in medicines%}
+    <div class="col-lg-4 col-md-6 col-sm-12" style="background-color:#c3eea0a4;">
+        <div class="course_card" >
+            <center> <div class="course_card_img"><img src="{{medi.prod_photo.url}}" style="width:300px;height:300px" alt=""></div>
+            </center><div class="course_card_content">
+                <h3 class="title">{{medi.prod_name}}</h3>
+                <p class="description">Rs: {{medi.prod_price}}</p>
+            </div>
+            <div class="course_card_footer"><a class="nav-item" href="/ViewDetails/{{medi.id}}">Shop Now</a></div>
+        </div>
+    </div>
+    {%endfor%}   
+</div>
+
+
+{%endblock%}

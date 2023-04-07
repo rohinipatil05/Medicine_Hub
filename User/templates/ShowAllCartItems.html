@@ -1,0 +1,168 @@
+{%extends "index.html"%}
+
+{%block content%}
+<script type="text/javascript">
+  function getConfirm(myid)
+  {
+      result = confirm("Are you sure you want to delete(y/n)?");
+      if(result)
+      {           
+         myform =  document.getElementById(myid);
+         myform.action = "/removeItem"
+         myform.submit();
+      }
+  }
+  function increment(myid)
+  {
+      txtQty = document.getElementById(myid);
+      if(txtQty.value < 10)
+      {
+          txtQty.value = parseInt(txtQty.value)+1;
+      }
+  }
+  function decrement(myid)
+  {
+      txtQty = document.getElementById(myid);
+      if(txtQty.value > 1)
+      {
+          txtQty.value = parseInt(txtQty.value)-1;
+      }
+  }
+
+</script>
+
+
+<div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0">
+          <a href="/">Home</a> <span class="mx-2 mb-0">/</span> 
+          <strong class="text-black">Cart</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   {%if messages%}
+   {%for message in messages%}
+   <center><strong style="color:red ;">{{message}} </strong></center>
+   {%endfor%}
+   {%endif%}
+  <div class="site-section">
+    <div class="container">
+      <div class="row mb-5">
+        
+          <div class="site-blocks-table">
+            <table class=" table-bordered" style="background-color:#e3fbd5a4;" >
+              <thead>
+                <tr>
+                  <th class="product-thumbnail" ><strong class="text-black">Image</strong></th>
+                  <th class="product-name"><strong class="text-black">Product</strong></th>
+                  <th class="product-price"><strong class="text-black">Price</strong></th>
+                  <th class="product-quantity"><strong class="text-black">Quantity</strong></th>
+                  <th class="product-quantity"><strong class="text-black">==</strong></th>
+                  <th class="product-total"><strong class="text-black">Sub Total</strong></th>
+                  <th class="product-remove"><strong class="text-black">Remove</strong></th>
+                </tr>
+              </thead>
+              
+                
+              {%for item in items%}
+              <form method="post" id="myform{{item.medicine.id}}">
+                {%csrf_token%}
+                
+                <tr>
+                  <input type="hidden" name="medicineid" value="{{item.medicine.id}}"/> 
+                  <td>
+                  <img src={{item.medicine.prod_photo.url}} alt="Image" class="img-fluid">
+                  </td>
+                  <td>
+                    <h2 class="h5 text-black">{{item.medicine.prod_name}} </h2>
+                  </td>
+                  <td>{{item.medicine.prod_price}}</td>
+                  <td>{{item.qty}}</td> 
+                  <td><button class="w3-button w3-white w3-border w3-border-green" type="button" 
+                    onclick="decrement('qty{{item.medicine.id}}')"> - </button> 
+                    <input type="text"  name="qty" id="qty{{item.medicine.id}}" value=" {{item.qty}}" size="1"/>
+                   
+                    <button class="w3-button w3-white w3-border w3-border-green" type="button" 
+                    onclick="increment('qty{{item.medicine.id}}')">  +  </button>
+                    
+                    <button class="btn btn-primary btn-md btn-block" size="8" type="submit" 
+                            name="action" value="update">Update</button>
+                </td>
+                
+                  <td>{% widthratio item.qty 1 item.medicine.prod_price %}</td>
+                  <td><button class="btn btn-primary height-auto btn-sm" type="button" 
+                    onclick="getConfirm('myform{{item.medicine.id}}')" > X </button> </td>
+                </tr>
+              </form>
+              {%endfor%}
+          
+            </table>
+          </div>
+       
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <button class="btn btn-primary btn-md btn-block" type="submit" 
+              name="action" value="update">Update Cart</button>
+            </div>
+            <div class="col-md-6">
+              <a href="/store" class="btn btn-outline-primary btn-md btn-block">Continue Shopping</a>
+             
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="text-black h4" for="coupon"></label>
+              <p></p>
+            </div>
+            <div class="col-md-8 mb-3 mb-md-0">
+              
+            </div>
+            <div class="col-md-4">
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 pl-5">
+          <div class="row justify-content-end">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-12 text-right border-bottom mb-5">
+                  <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                </div>
+              </div>
+              <div class="row mb-3">
+              
+                
+              </div>
+              <div class="row mb-5">
+                <div class="col-md-6">
+                  <span class="text-black">Total</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">Rs: {{request.session.total}}</strong>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-md-12">
+                  <a href="/ShippingDetails" class="btn btn-primary btn-lg btn-block">Proceed To
+                    Checkout</a>
+             
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{%endblock%}
